@@ -1,0 +1,61 @@
+---
+import NextJs from "../assets/nextjs-icon.svg"
+import SpringBoot from "../assets/spring.svg"
+import PostgreSql from "../assets/postgresql.svg"
+import JavaScript from "../assets/javascript.svg"
+import NodeJs from "../assets/nodejs.svg"
+import Python from "../assets/python.svg"
+import Git from "../assets/git.svg"
+import Html from "../assets/html5.svg"
+import Css from "../assets/css.svg"
+import Tailwind from "../assets/tailwindcss.svg"
+import Docker from "../assets/docker.svg"
+import Tooltip from "./Tooltip.astro"
+
+const icons = [{
+  icon:NextJs,
+  name:"after:content-['NextJs']"
+}, {
+  icon:SpringBoot,
+  name:"after:content-['SpringBoot']"
+}, {
+  icon:PostgreSql,
+  name:"after:content-['PostgreSql']"
+}, {
+  icon:Html,
+  name:"after:content-['Html']"
+}, {
+  icon:Css,
+  name:"after:content-['Css']"
+}, {
+  icon:JavaScript,
+  name:"after:content-['JavaScript']"
+}, {
+  icon:Tailwind,
+  name:"after:content-['Tailwind']"
+}, {
+  icon:Git,
+  name:"after:content-['Entorno_de_Git']"
+}, {
+  icon:NodeJs,
+  name:"after:content-['NodeJs_+_Express']"
+}, {
+  icon:Docker,
+  name:"after:content-['Docker']"
+}, {
+  icon:Python,
+  name:"after:content-['Python_+_Django']"
+}]
+---
+
+<aside class="flex gap-2 flex-wrap">
+  {icons.map(element => {
+    const { icon: Icon, name } = element;
+    return (
+    <Tooltip text={name} position="top">
+      <span class="p-2 block w-fit aspect-square rounded-full bg-linear-to-b from-bg-theme-secondary to-bg-theme-secondary-hover">
+        <Icon class="size-5" />
+      </span>
+    </Tooltip>
+  )})}
+</aside>

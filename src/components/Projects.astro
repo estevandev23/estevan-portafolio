@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+
+const projects = await getCollection('projects');
+---
+<section id="projects">
+  {projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).map(project => {
+    const { title, date, image, tags, url, indications, shortDescription } = project.data
+    return (
+      <article>
+        <h2>{title}</h2>
+        <p>Indicaciones: {indications?.join(", ")}</p>
+        <a href={url.public}>Ver Proyecto</a>
+        <p>{date.toLocaleDateString()}</p>
+        <img src={image[0]} alt={`Imagen para proyecto ${title}`} />
+        <p>Etiquetas: {tags.join(", ")}</p>
+        <p>{shortDescription}</p>
+      </article>
+    )
+  })}
+</section>

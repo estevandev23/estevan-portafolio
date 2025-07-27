@@ -1,0 +1,43 @@
+---
+const id = "theme-toggle";
+import Dark from "../assets/dark.svg"
+import Light from "../assets/light.svg"
+import Tooltip from "./Tooltip.astro";
+
+type Props = {
+  position?: "top" | "bottom" | "left" | "right";
+};
+
+const { position = "left" } = Astro.props;
+---
+<Tooltip text="after:content-['Cambiar_tema']" position={position}>
+  <button id={id} class="transition-transform relative after:absolute transform after:duration-1000 ease-in-out after:transition-transform after:content-[''] after:left-0 after:w-1/2 after:-z-10 after:rounded-full after:h-full after:bg-bg-theme-secondary-hover rotate-0 bg-bg-theme-secondary cursor-pointer font-semibold flex gap-2 rounded-full overflow-hidden">
+    <span class="p-2">
+      <Dark class="size-5 transform transition-all" id="dark-icon" />
+    </span>
+    <span class="p-2">
+      <Light class="size-5 transform transition-all" id="light-icon" />
+    </span>
+  </button>
+</Tooltip>
+
+<script>
+  const button = document.getElementById("theme-toggle");
+  const storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const darkIcon = document.getElementById("dark-icon");
+  const lightIcon = document.getElementById("light-icon");
+  applyTheme(storedTheme);
+
+  function applyTheme(theme: string) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    button?.classList.toggle("after:translate-x-full", theme === "light");
+  }
+
+  button?.addEventListener("click", () => {
+    const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    applyTheme(newTheme)
+  });
+
+</script>

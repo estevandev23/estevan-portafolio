@@ -1,0 +1,82 @@
+---
+import Home from "../assets/home.svg";
+import Contact from "../assets/contact.svg";
+import Projects from "../assets/projects.svg";
+import About from "../assets/about.svg";
+import Bars from "../assets/bars.svg";
+import Close from "../assets/close.svg";
+import logo from "../../public/estevandev-logo.svg";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const options = [
+  {
+    label: "Inicio",
+    href: "/",
+    Icon: Home,
+  },
+  {
+    label: "Proyectos",
+    href: "#projects",
+    Icon: Projects,
+  },
+  {
+    label: "Acerca de mí",
+    href: "/about",
+    Icon: About,
+  },
+  {
+    label: "Contacto",
+    href: "#contact",
+    Icon: Contact,
+  }
+]
+---
+<!-- <style>
+  header {
+    background: linear-gradient(180deg, var(--color-bg-theme) 0%, transparent 100%);
+  }
+</style> -->
+<header class="p-4 fixed w-full z-50 top-0 left-0"> 
+  <input type="checkbox" name="menu" id="openMenu" class="hidden peer">
+  <nav class="flex w-full backdrop-blur-sm items-center justify-between rounded-full max-w-7xl mx-auto p-4">
+    <img src={logo.src} class="h-16" alt="Estevan Dev Logo">
+    <ul class="gap-8 sm:flex hidden">
+      {
+        options.map(option => {
+          const { Icon, href, label } = option;
+          return (
+          <li>
+            <a class="flex gap-1 items-center py-1 px-2 rounded-md transition-colors hover:bg-bg-theme-secondary" href={href}>
+              <Icon class="h-5" />
+              {label}
+            </a>
+          </li>
+        )})
+      }
+    </ul>
+    <label for="openMenu" class="sm:hidden block bg-bg-theme-secondary cursor-pointer hover:bg-bg-theme-secondary-hover font-semibold p-2 rounded-full aspect-square">
+      <Bars class="h-5" />
+    </label>
+    <ThemeToggle position="bottom" />
+  </nav>
+  <section class="sm:hidden sm:peer-checked:hidden fixed top-0 h-full backdrop-blur-md left-0 w-full p-3 peer-checked:block hidden z-50">
+    <ul class="flex flex-col w-full rounded-xl bg-bg-theme-secondary overflow-hidden">
+      {
+        options.map(option => {
+          const { Icon, href, label } = option;
+          return (
+            <li>
+              <a class="flex gap-4 items-center p-5 hover:bg-bg-theme-secondary-hover" href={href}>
+                <Icon class="h-5" />
+                {label}
+              </a>
+            </li>
+          )
+        })
+      }
+    </ul>
+    <label for="openMenu" class="mx-auto block my-2 w-fit bg-bg-theme-secondary cursor-pointer hover:bg-bg-theme-secondary-hover text-text-theme font-semibold p-2 rounded-full aspect-square">
+      <Close class="h-5" />
+    </label>
+  </section>
+</header>

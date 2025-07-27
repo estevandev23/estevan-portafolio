@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: mitrmedium;
+  font-style: normal;
+  font-weight: 100 200 300 400 500 700 800 900;
+  font-display: swap;
+  src: url("/fonts/mitr.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: montserrat;
+  font-style: normal;
+  font-weight: 100 200 300 400 500 700 800 900;
+  font-display: swap;
+  src: url("/fonts/Montserrat.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: acumin;
+  src: url("https://use.typekit.net/daf0nyl.css");
+}
+
+@theme {
+  --font-mitr: mitrmedium, sans-serif;
+  --font-montserrat: montserrat, sans-serif;
+  --font-acumin: acumin, sans-serif;
+  --color-bg-theme: var(--color-white);
+  --color-bg-theme-opacity: rgba(255, 255, 255, 0.9);
+  --color-bg-theme-light-opacity: rgba(113, 167, 241, 0.6);
+  --color-text-theme: var(--color-gray-700);
+  --color-text-theme-light: var(--color-gray-500);
+  --color-bg-theme-secondary: var(--color-gray-100);
+  --color-bg-theme-secondary-hover: var(--color-gray-200);
+  --color-blue-main: #1EA3EC;
+  --color-blue-second: #2E5FA9;
+}
+
+* {
+  @apply scroll-smooth;
+  /* background-color: rgba(47, 132, 250, 0.9); */
+}
+
+body {
+  @apply transition-colors ease-in-out;
+}
+.fdasf {
+  background-color: rgba(113, 167, 241, 0.9);
+}
+
+body {
+  background-color: var(--color-bg-theme);
+  color: var(--color-text-theme);
+}
+
+[data-theme="dark"] {
+  --color-bg-theme: var(--color-gray-900);
+  --color-bg-theme-opacity: rgba(31, 41, 55, 0.9);
+  --color-text-theme: var(--color-gray-100);
+  --color-text-theme-light: var(--color-gray-300);
+  --color-bg-theme-light-opacity: rgba(6, 76, 173, 0.9);
+  --color-bg-theme-secondary: var(--color-gray-800);
+  --color-bg-theme-secondary-hover: var(--color-gray-700);
+}
