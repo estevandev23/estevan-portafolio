@@ -16,7 +16,7 @@ const options = [
   },
   {
     label: "Proyectos",
-    href: "#projects",
+    href: "/#projects",
     Icon: Projects,
   },
   {
@@ -26,19 +26,14 @@ const options = [
   },
   {
     label: "Contacto",
-    href: "#contact",
+    href: "/#contact",
     Icon: Contact,
   }
 ]
 ---
-<!-- <style>
-  header {
-    background: linear-gradient(180deg, var(--color-bg-theme) 0%, transparent 100%);
-  }
-</style> -->
 <header class="p-4 fixed w-full z-50 top-0 left-0"> 
   <input type="checkbox" name="menu" id="openMenu" class="hidden peer">
-  <nav class="flex w-full backdrop-blur-sm items-center justify-between rounded-full max-w-7xl mx-auto p-4">
+  <nav class="flex w-full backdrop-blur-sm items-center justify-between rounded-md max-w-7xl mx-auto p-4">
     <img src={logo.src} class="h-16" alt="Estevan Dev Logo">
     <ul class="gap-8 sm:flex hidden">
       {
@@ -53,7 +48,7 @@ const options = [
           </li>
         )})
       }
-    </ul>
+  </ul>
     <label for="openMenu" class="sm:hidden block bg-bg-theme-secondary cursor-pointer hover:bg-bg-theme-secondary-hover font-semibold p-2 rounded-full aspect-square">
       <Bars class="h-5" />
     </label>

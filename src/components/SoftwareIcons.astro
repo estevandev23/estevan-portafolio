@@ -47,15 +47,34 @@ const icons = [{
   name:"after:content-['Python_+_Django']"
 }]
 ---
+<style>
+  .slider {
+    animation: slide 10s linear infinite;
+    width: calc(33px * 10); /* 66px is the width of each icon */
+  }
 
-<aside class="flex gap-2 flex-wrap">
-  {icons.map(element => {
-    const { icon: Icon, name } = element;
-    return (
-    <Tooltip text={name} position="top">
-      <span class="p-2 block w-fit aspect-square rounded-full bg-linear-to-b from-bg-theme-secondary to-bg-theme-secondary-hover">
-        <Icon class="size-5" />
-      </span>
-    </Tooltip>
-  )})}
-</aside>
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-32px * 15)); /* Move left by half the total width */
+    }
+  }
+</style>
+<section class="overflow-hidden w-min mask-l-from-80% mask-l-to-100% mask-r-from-80% mask-r-to-100%">
+  <aside class="flex gap-2 slider">
+    {[0,1].map(i => {
+      return icons.map(element => {
+        const { icon: Icon, name } = element;
+        return (
+          <Tooltip text={name} position="top">
+            <span class="p-2 block w-fit aspect-square rounded-full bg-linear-to-b from-bg-theme-secondary to-bg-theme-secondary-hover">
+              <Icon class="size-5" />
+            </span>
+          </Tooltip>
+        )
+      })
+    })}
+  </aside>
+</section>

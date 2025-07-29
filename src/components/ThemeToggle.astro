@@ -11,7 +11,7 @@ type Props = {
 const { position = "left" } = Astro.props;
 ---
 <Tooltip text="after:content-['Cambiar_tema']" position={position}>
-  <button id={id} class="transition-transform relative after:absolute transform after:duration-1000 ease-in-out after:transition-transform after:content-[''] after:left-0 after:w-1/2 after:-z-10 after:rounded-full after:h-full after:bg-bg-theme-secondary-hover rotate-0 bg-bg-theme-secondary cursor-pointer font-semibold flex gap-2 rounded-full overflow-hidden">
+  <button id={id} class="transition-transform relative after:absolute transform after:duration-1000 ease-in-out after:transition-transform after:content-[''] after:left-0 after:w-1/2 after:-z-10 after:rounded-full after:h-full after:bg-bg-theme-secondary-hover rotate-0 bg-bg-theme-secondary cursor-pointer font-semibold flex rounded-full overflow-hidden">
     <span class="p-2">
       <Dark class="size-5 transform transition-all" id="dark-icon" />
     </span>
@@ -24,20 +24,29 @@ const { position = "left" } = Astro.props;
 <script>
   const button = document.getElementById("theme-toggle");
   const storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  const darkIcon = document.getElementById("dark-icon");
-  const lightIcon = document.getElementById("light-icon");
   applyTheme(storedTheme);
 
   function applyTheme(theme: string) {
+    console.log(`Applying theme: ${theme}`);
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     button?.classList.toggle("after:translate-x-full", theme === "light");
   }
 
+  function setupThemeToggle() {
+    const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    console.log(`Current theme on load: ${currentTheme}`);
+    applyTheme(currentTheme);
+  }
+
   button?.addEventListener("click", () => {
+    console.log("Theme toggle clicked");
     const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
+    console.log(`Current theme: ${currentTheme}, New theme: ${newTheme}`);
     applyTheme(newTheme)
   });
+
+  document.addEventListener('astro:page-load', setupThemeToggle);
 
 </script>

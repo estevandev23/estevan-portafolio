@@ -1,0 +1,40 @@
+---
+import GithubIcon from '../assets/github.svg';
+import InstagramIcon from '../assets/instagram.svg';
+import LinkedinIcon from '../assets/linkedin.svg';
+
+import { getCollection } from 'astro:content';
+import IconSocial from './IconSocial.astro';
+
+const icons = [GithubIcon, InstagramIcon, LinkedinIcon];
+const social = await getCollection('social');
+const regex = /.*\/(.*?)\?/
+
+function getIconName(src: string): string {
+  const match = src.match(regex);
+  return match ? match[1].split('.')[0] : '';
+}
+
+const socialIcons = social.map(s => {
+  const { name, url } = s.data;
+  const Icono = icons.find(i => getIconName(i.src) === name.toLowerCase());
+  return {
+    name,
+    url,
+    Icono
+  };
+});
+---
+
+<ul class="flex gap-2 -ml-10 items-center flex-col gap-4 h-fit w-fit">
+  {socialIcons.map(socialIcon => {
+    const { name, url, Icono } = socialIcon;
+    return (
+      <IconSocial
+        name={name}
+        url={url}
+        Icono={Icono ?? null}
+      />
+    );
+  })}
+</ul>

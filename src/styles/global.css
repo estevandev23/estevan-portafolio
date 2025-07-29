@@ -36,6 +36,26 @@
   --color-blue-main: #1EA3EC;
   --color-blue-second: #2E5FA9;
 }
+:root {
+  --php: 137, 147, 190;
+  --javascript: 247, 223, 30;
+  --springboot: 109, 179, 63;
+  --nodejs: 131, 205, 41;
+  --mysql: 68, 121, 161;
+  --mongodb: 71, 162, 72;
+  --react: 97, 218, 251;
+  --html: 227, 76, 38;
+  --css: 38, 77, 228;
+  --bootstrap: 86, 61, 124;
+  --tailwind: 56, 178, 172;
+  --git: 243, 79, 41;
+  --github: 24, 23, 23;
+  --mariadb: 0, 77, 100;
+  --firebase: 255, 174, 0;
+  --cloudinary: 247, 247, 247;
+  --zustand: 255, 174, 0;
+  --python: 55, 118, 171;
+}
 
 * {
   @apply scroll-smooth;
@@ -45,6 +65,7 @@
 body {
   @apply transition-colors ease-in-out;
 }
+
 .fdasf {
   background-color: rgba(113, 167, 241, 0.9);
 }
@@ -62,4 +83,22 @@ body {
   --color-bg-theme-light-opacity: rgba(6, 76, 173, 0.9);
   --color-bg-theme-secondary: var(--color-gray-800);
   --color-bg-theme-secondary-hover: var(--color-gray-700);
+  --php: 137, 147, 190;
+  --javascript: 247, 223, 30;
+  --springboot: 109, 179, 63;
+  --nodejs: 131, 205, 41;
+  --mysql: 68, 121, 161;
+  --mongodb: 71, 162, 72;
+  --react: 97, 218, 251;
+  --html: 227, 76, 38;
+  --css: 38, 77, 228;
+  --bootstrap: 86, 61, 124;
+  --tailwind: 56, 178, 172;
+  --git: 243, 79, 41;
+  --github: 24, 23, 23;
+  --mariadb: 0, 77, 100;
+  --firebase: 255, 174, 0;
+  --cloudinary: 247, 247, 247;
+  --zustand: 255, 174, 0;
+  --python: 55, 118, 171;
 }

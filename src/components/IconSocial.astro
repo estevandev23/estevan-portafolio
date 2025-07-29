@@ -1,0 +1,23 @@
+---
+import Tooltip from './Tooltip.astro';
+
+// src/components/IconoRedSocial.astro
+interface Props {
+  name: string;
+  url: string;
+  Icono: typeof import('*.svg').default | null;
+}
+
+const { name, url, Icono } = Astro.props;
+
+// Se crea una variable CSS específica para ESTE componente.
+// El nombre de la variable es el mismo, pero su alcance es solo este elemento.
+const style = `--tooltip-text: '${name}';`;
+---
+<li style={style}>
+  <Tooltip text="after:content-[var(--tooltip-text)]" position="top">
+    <a href={url} target="_blank" rel="noopener noreferrer" class="text-text-theme fill-text-theme p-2 rounded-full hover:bg-bg-theme-secondary-hover transition-colors block">
+      {Icono && <Icono class="size-7 fill-text-theme text-text-theme" />}
+    </a>
+  </Tooltip>
+</li>

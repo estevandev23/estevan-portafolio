@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Tags from "../../components/Tags.astro";
+
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map(project => ({
+    params: { id: project.slug },
+    props: { project }
+  }));
+}
+
+const { id } = Astro.params;
+const { project } = Astro.props;
+const { title, date, image, tags, url, indications, shortDescription } = project.data
+const { Content } = await render(project)
+---
+
+<Layout title={title}>
+  <main class="max-w-7xl h-dvh mx-auto flex items-center justify-center">
+    <div class="m-auto flex items-start gap-2">
+      <aside>
+        <Tags tags={tags} />
+        <img 
+          transition:name={`img-project-${id}`}
+          src={image[0]} 
+          alt={`Imagen para proyecto ${title}`} />
+      </aside>
+      <aside>
+        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+        <Content />
+      </aside>
+    </div>
+  </main>
+</Layout>

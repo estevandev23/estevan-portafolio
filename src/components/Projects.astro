@@ -1,21 +1,48 @@
 ---
 import { getCollection } from "astro:content";
+import CardProject from "./CardProject.astro";
+import Quote from "../assets/quote.svg";
 
 const projects = await getCollection('projects');
 ---
-<section id="projects">
-  {projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).map(project => {
-    const { title, date, image, tags, url, indications, shortDescription } = project.data
-    return (
-      <article>
-        <h2>{title}</h2>
-        <p>Indicaciones: {indications?.join(", ")}</p>
-        <a href={url.public}>Ver Proyecto</a>
-        <p>{date.toLocaleDateString()}</p>
-        <img src={image[0]} alt={`Imagen para proyecto ${title}`} />
-        <p>Etiquetas: {tags.join(", ")}</p>
-        <p>{shortDescription}</p>
-      </article>
-    )
-  })}
-</section>
+<style>
+  .bg-section {
+    background-image: 
+    radial-gradient(circle at top, var(--color-bg-theme-opacity) 0%, var(--color-bg-theme-opacity) 40%),
+    url(/galaxia2.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-mask-image: linear-gradient(to top, black 99%, transparent 100%);
+    mask-image: linear-gradient(to top, black 99%, transparent 100%);
+  }
+</style>
+<div class="bg-section p-4" id="projects">
+  <section aria-label="Proyectos de Estevan Dev" class="max-w-7xl m-auto mt-40">
+    <div class="flex flex-col gap-4 mb-10">
+      <h3 class="sm:text-5xl text-4xl font-bold">Empecemos ...</h3>
+      <p class="prose-base text-text-theme-light">Quiero que descubras los proyectos que he realizado independiente durante mi carrera.</p>
+    </div>
+    <aside class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
+      {projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).map(project => {
+        const { title, date, image, tags, url, indications, shortDescription } = project.data
+        return (
+          <CardProject
+            title={title}
+            date={date}
+            image={image}
+            tags={tags}
+            url={url}
+            indications={indications}
+            shortDescription={shortDescription}
+            id={project.slug}
+          />
+        )
+      })}
+    </aside>
+    <div class="flex flex-col gap-4 mt-10 p-6 rounded-md bg-bg-theme-secondary overflow-hidden relative">
+      <h3 class="text-xl z-10 font-bold">No he realizado solo esto 🙂‍↔️</h3>
+      <p class="prose-base z-10 text-text-theme-light">Adicionalmente, he prodido colaborar en proyectos muy grandes, donde no solo he desarrollado software, si no que he aprendido a desplegar, configurar servidores, monitorear, y muchas cosas más. Por lo cual esto es solo una parte de mi trabajo</p>
+      <Quote class="text-text-theme-light absolute -top-5 -left-2 size-28 -z-0 rotate-[15deg] opacity-10" />
+    </div>
+  </section>
+</div>

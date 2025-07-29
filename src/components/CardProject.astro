@@ -1,0 +1,36 @@
+---
+import Tags from './Tags.astro';
+
+type Props = {
+  title: string;
+  date: Date;
+  image: string[];
+  tags?: string[];
+  url: { public?: string, github?: string };
+  indications?: string[];
+  shortDescription?: string;
+  id: string;
+};
+
+const { title, date, image, tags, url, indications, shortDescription, id } = Astro.props;
+const formattedDate = date.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
+---
+
+<a href=`/project/${id}` class="relative block h-[500px] group overflow-hidden cursor-pointer rounded-md">
+  <img 
+    transition:name={`img-project-${id}`}
+    src={image[0]} 
+    alt={`Imagen para proyecto ${title}`} 
+    class="absolute top-0 left-0 group-hover:scale-110 ease-in-out group-hover:object-right transition-all duration-[9000ms] -z-10 h-full object-cover object-center md:object-left" 
+  />
+  <section class="bg-linear-to-t from-gray-800 from-20% to-60% to-transparent text-white p-4 h-full flex flex-col gap-2 flex-col justify-end">
+    <Tags tags={tags} />
+    <h4 class="text-xl font-bold">{title}</h4>
+    <p>{shortDescription}</p>
+    <p class="text-sm text-gray-400">Realizado el {formattedDate}</p>
+  </section>
+</a>
