@@ -3,13 +3,14 @@ import TagIcon from "../assets/tag.svg";
 const { tag } = Astro.props;
 
 const style = `
-  --mycolor: rgb(var(--${tag.split(' ').join('-').toLowerCase()}), 0.6);
-  --mycolor-opacity: rgb(var(--${tag.split(' ').join('-').toLowerCase()}), 0.2);
+  --mycolor: color-mix(in srgb, rgb(var(--${tag.split(' ').join('-').toLowerCase()})), black 70%);
+  --mycolor-opacity: color-mix(in srgb, rgb(var(--${tag.split(' ').join('-').toLowerCase()})), black 60%);
 `;
 ---
 
-<div style={style} class="flex text-xs items-center gap-1 p-1 py-0 rounded-md bg-[var(--mycolor-opacity)] border border-2 border-transparent hover:border-[var(--mycolor-opacity)]">
-  <TagIcon class="fill-[var(--mycolor)] stroke-[var(--mycolor-opacity)] h-2.5 -scale-x-100" />
+<div style={style} class="flex text-xs items-center gap-1 px-2 py-0 rounded-md bg-[var(--mycolor)] border border-2 border-transparent hover:border-[var(--mycolor-opacity)]">
+  <!-- <TagIcon class="fill-[var(--mycolor)] stroke-[var(--mycolor-opacity)] h-2.5 -scale-x-100" /> -->
+  <img src={`/src/assets/${tag.split(' ').join('-').toLowerCase()}.svg`} alt={`Logo de ${tag} del proyecto`} class="size-2.5" />
   <span class="block text-white rounded-md">
     {tag}
   </span>

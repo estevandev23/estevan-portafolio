@@ -1,0 +1,118 @@
+---
+import Arrow from '../assets/arrow.svg';
+import Tooltip from './Tooltip.astro';
+const { length = 0, name } = Astro.props;
+---
+<style>
+  .slider::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+<div class="relative">
+  <aside id="slider" class="slider flex relative overflow-x-scroll snap-x snap-mandatory" data-length={length} aria-label={`Slider de ${name}`} style="">
+    <slot />
+  </aside>
+  <div class="flex items-center justify-center gap-2 mt-2">
+    {Array.from({ length }).map((_, index) => {
+      return (
+        <div class="aspect-square h-2 rounded-full bg-bg-theme-secondary-hover point cursor-pointer hover:bg-text-theme-light" data-position={index} />
+      )
+    })}
+  </div>
+  <div id="rightArrow" class="absolute top-0 right-0 h-full w-12 flex place-items-center bg-gradient-to-l cursor-pointer z-20">
+    <Tooltip
+      text="after:content-['Siguiente']"
+      position="left"
+      isInline
+      className='p-2 rounded-full bg-gradient-to-b from-bg-theme-secondary-hover to-bg-theme-opacity'
+    >
+      <Arrow class="size-5 stroke-text-theme" />
+    </Tooltip>
+  </div>
+  <div id="leftArrow" class="absolute pl-3 top-0 left-0 h-full w-12 flex place-items-center bg-gradient-to-r cursor-pointer z-20">
+    <Tooltip
+      text="after:content-['Anterior']"
+      position="right"
+      isInline
+      className='p-2 rounded-full bg-gradient-to-b from-bg-theme-secondary-hover to-bg-theme-opacity'
+    >
+      <Arrow class="size-5 stroke-text-theme rotate-180" />
+    </Tooltip>
+  </div>
+</div>
+
+<script>
+  const dots = document.querySelectorAll('.point') as NodeListOf<HTMLDivElement>;
+
+  function colorsDots(actualPosition: number) {
+    const oldElementSelected = document.querySelector('.point.bg-text-theme-light');
+    oldElementSelected?.classList.remove('bg-text-theme-light');
+    const currentDot = document.querySelector(`.point[data-position="${actualPosition}"]`);
+    currentDot?.classList.add('bg-text-theme-light');
+  }
+
+  function getScrollProperties() {
+    const slider = document.getElementById('slider');
+    const width = slider?.offsetWidth || 0;
+    const length = Number(slider?.dataset?.length) || 0;
+    const scrollAmount = slider?.scrollLeft || 0
+    const actualPosition = Math.floor(scrollAmount / width);
+    colorsDots(actualPosition);
+    return { width, length, scrollAmount, slider };
+  }
+
+  function isFinishedScrollingRight(newScrollPosition?: number) {
+    const { width, length, scrollAmount } = getScrollProperties();
+    return (newScrollPosition || scrollAmount) >= (width * (length - 1));
+  }
+
+  function isFinishedScrollingLeft(newScrollPosition?: number) {
+    const { scrollAmount } = getScrollProperties();
+    return (newScrollPosition ?? scrollAmount) <= 0;
+  }
+  
+  const rightArrow = document.getElementById('rightArrow');
+  rightArrow?.addEventListener('click', () => {
+    const {width, slider} = getScrollProperties();
+    if (!slider) return;
+    const newScrollPosition = slider.scrollLeft + width;
+    slider.scrollLeft = newScrollPosition;
+    handleArrowVisibility(newScrollPosition);
+  });
+  
+  const leftArrow = document.getElementById('leftArrow');
+  leftArrow?.addEventListener('click', () => {
+    const { width, slider } = getScrollProperties();
+    if (!slider) return;
+    const newScrollPosition = slider.scrollLeft - width;
+    slider.scrollLeft = newScrollPosition;
+    handleArrowVisibility(newScrollPosition);
+  });
+
+  function handleArrowVisibility(newScrollPosition?: number) {
+    rightArrow?.classList.toggle('hidden', isFinishedScrollingRight(newScrollPosition));
+    leftArrow?.classList.toggle('hidden', isFinishedScrollingLeft(newScrollPosition));
+
+  }
+
+  const slider = document.getElementById('slider');
+  slider?.addEventListener('scroll', () => {
+    handleArrowVisibility();
+  });
+
+  handleArrowVisibility()
+
+  dots.forEach(dot => {
+    if (dot.dataset.position === '0') {
+      dot.classList.add('bg-text-theme-light');
+    }
+    dot.addEventListener('click', () => {
+      const position = Number(dot.dataset.position);
+      const { slider } = getScrollProperties();
+      if (!slider) return;
+      slider.scrollLeft = position * slider.offsetWidth;
+      colorsDots(position);
+      handleArrowVisibility(slider.scrollLeft);
+    });
+  });
+</script>

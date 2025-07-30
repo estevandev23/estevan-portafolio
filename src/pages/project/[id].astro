@@ -20,19 +20,22 @@ const { Content } = await render(project)
 ---
 
 <Layout title={title}>
-  <main class="max-w-7xl h-dvh mx-auto flex items-center justify-center">
-    <div class="m-auto flex items-start gap-2">
-      <aside>
-        <Tags tags={tags} />
-        <img 
-          transition:name={`img-project-${id}`}
-          src={image[0]} 
-          alt={`Imagen para proyecto ${title}`} />
-      </aside>
-      <aside>
-        <h1 class="text-4xl font-bold mb-4">{title}</h1>
-        <Content />
-      </aside>
+  <main class="max-w-6xl h-dvh mx-auto flex items-center justify-center">
+    <div>
+      <a href="/#projects">Regresar</a>
+      <div class="m-auto flex items-start gap-2">
+        <aside>
+          <Tags tags={tags} />
+          <img 
+            transition:name={`img-project-${id}`}
+            src={image[0]} 
+            alt={`Imagen para proyecto ${title}`} />
+        </aside>
+        <aside>
+          <h1 class="text-4xl font-bold mb-4">{title}</h1>
+          <Content />
+        </aside>
+      </div>
     </div>
   </main>
 </Layout>

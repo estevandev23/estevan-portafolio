@@ -18,16 +18,17 @@ const formattedDate = date.toLocaleDateString("es-ES", {
   month: "long",
   day: "numeric"
 });
----
 
-<a href=`/project/${id}` class="relative block h-[500px] group overflow-hidden cursor-pointer rounded-md">
+---
+<!-- <div class="snap-center min-w-full snap-center rounded-md h-50 bg-red-500 w-xl border-2 border-red-600">f</div> -->
+<a href={`/project/${id}`} class="sticky block snap-center min-w-full left-0 group overflow-hidden cursor-pointer rounded-md h-[500px] z-10 w-1/2">
   <img 
     transition:name={`img-project-${id}`}
     src={image[0]} 
     alt={`Imagen para proyecto ${title}`} 
-    class="absolute top-0 left-0 group-hover:scale-110 ease-in-out group-hover:object-right transition-all duration-[9000ms] -z-10 h-full object-cover object-center md:object-left" 
+    class="absolute top-0 left-0 w-full transition-all duration-[500ms]  -z-10 h-full object-cover object-center " 
   />
-  <section class="bg-linear-to-t from-gray-800 from-20% to-60% to-transparent text-white p-4 h-full flex flex-col gap-2 flex-col justify-end">
+  <section class="bg-linear-to-t from-gray-800 from-20% to-60% to-transparent text-white p-10 h-full flex flex-col gap-2 flex-col z-10 justify-end">
     <Tags tags={tags} />
     <h4 class="text-xl font-bold">{title}</h4>
     <p>{shortDescription}</p>

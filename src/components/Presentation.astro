@@ -12,39 +12,30 @@ const linkedin = social.find(s => s.data.name.toLowerCase() === 'linkedin')
 ---
 <style>
   .bg-section {
-    background-image: 
-    radial-gradient(circle at top, var(--color-bg-theme-light-opacity) 0%, var(--color-bg-theme-opacity) 50%),
-    url(/galaxia.jpg);
-    background-attachment: fixed;
-    background-position: center;
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    background: 
+    radial-gradient(circle at top, var(--color-bg-theme-light-opacity) 0%, var(--color-bg-theme-opacity) 50%);
   }
 </style>
 <section class="bg-section">
-  <section id="estevan-dev-presentation" class="min-h-dvh py-28 sm:py-0 h-max max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <aside class="p-4 m-auto">
+  <section id="estevan-dev-presentation" class="min-h-dvh py-28 sm:py-0 h-max max-w-6xl mx-auto grid grid-cols-1 gap-4">
+    <aside class="p-4 m-auto flex flex-col gap-3 items-center">
       <p class="font-light text-lg py-1 px-2 rounded-md bg-bg-theme-secondary w-fit">Bienvenidos a mi portafolio! 🚀</p>
-      <h1 class="text-text-theme flex flex-col xl:flex-row sm:text-4xl text-4xl mb-10 mt-1" aria-label="Presentación de Estevan Dev">
-        Soy, <Tooltip text="after:content-['Brayan_Esteban_Villamizar_Fernandez']" position="bottom"><LogoName class="fill-[url(#MyGradient)] sm:h-12 h-12 -ml-5 xl:ml-0" /></Tooltip> 
-      </h1>
-      <section class="flex flex-col gap-1 my-3">
+      <div class="flex flex-col items-center md:flex-row items-center gap-2 mt-5">
+        <Tooltip isInline text="after:content-['Si,_este_soy_yo_😎']" position="top" className="hover:scale-110 hover:-translate-y-1 transition-transform ease-out">
+          <img src="/perfil.jpg" alt="imagen perfil de Estevan Dev" class="object-center rounded-full h-full object-cover object-center aspect-square size-16" />
+        </Tooltip>
+        <h1 class="text-text-theme flex flex-col md:flex-row text-4xl" aria-label="Presentación de Estevan Dev">
+          Soy,<Tooltip text="after:content-['Brayan_Esteban_Villamizar_Fernandez']" position="bottom"><LogoName class="fill-[url(#MyGradient)] sm:h-12 h-12 -ml-5 md:ml-0" /></Tooltip>
+        </h1>
+      </div>
+        <p class="prose max-w-lg text-text-theme-light text-justify">
+          Soy <Tooltip text="after:content-['Frontend_😉']" isInline position="bottom"><strong class="text-text-theme-light text-lg">Desarrollador web</strong></Tooltip> con más de 3 años de experiencia, me encanta aprender y poder crear nuevas experiencias digitales.
+        </p>
         <SoftwareIcons />
-        <h2 class="prose font-bold text-5xl text-text-theme text-wrap break-words">Desarrollador <Tooltip text="after:content-['Frontend_😉']" position="bottom"><span class="bg-gradient-to-b text-transparent bg-clip-text inline-block from-blue-main to-blue-second">Web</span></Tooltip></h2>
-      </section>
-      <p class="prose text-text-theme-light text-justify">
-        Soy un amante al desarrollo web, las <strong class="text-text-theme-light">nuevas tecnologías</strong> y sobre todo a la resolución de problemas. Con más de 3 años de experiencia, me encanta aprender y poder crear nuevas experiencias digitales.
-      </p>
       <div class="mt-10 flex gap-3 items-center">
         <a href="/hoja-vida.pdf" class="py-2 px-4 block w-fit rounded-md border-bg-theme-secondary-hover border hover:bg-bg-theme-secondary" download="hoja-vida-estevan.pdf">Descargar CV</a>
         <a href={linkedin?.data.url} class="py-2 px-4 flex gap-2 items-center w-fit rounded-md border-bg-theme-secondary-hover border from-transparent to-transparent transition-colors hover:bg-bg-theme-secondary" target="_blank"><LinkedinIcon class="size-4" /> {linkedin?.data.name}</a>
       </div>
-    </aside>
-    <aside class="flex flex-row md:flex-row items-center">
-      <div class="p-4 bg-gradient-to-t bg-radial from-blue-main to-transparent from-0% to-60% rounded-full aspect-square h-fit w-fit">
-        <img src="/foto.png" alt="imagen perfil de Estevan Dev" class="object-center ml-5 rounded-lg h-full object-contain" />
-      </div>
-      <SocialIcons />
     </aside>
   </section>
 </section>

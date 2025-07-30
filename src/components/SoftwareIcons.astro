@@ -6,9 +6,9 @@ import JavaScript from "../assets/javascript.svg"
 import NodeJs from "../assets/nodejs.svg"
 import Python from "../assets/python.svg"
 import Git from "../assets/git.svg"
-import Html from "../assets/html5.svg"
+import Html from "../assets/html.svg"
 import Css from "../assets/css.svg"
-import Tailwind from "../assets/tailwindcss.svg"
+import Tailwind from "../assets/tailwind.svg"
 import Docker from "../assets/docker.svg"
 import Tooltip from "./Tooltip.astro"
 
@@ -50,7 +50,6 @@ const icons = [{
 <style>
   .slider {
     animation: slide 10s linear infinite;
-    width: calc(33px * 10); /* 66px is the width of each icon */
   }
 
   @keyframes slide {
@@ -63,7 +62,7 @@ const icons = [{
   }
 </style>
 <section class="overflow-hidden w-min mask-l-from-80% mask-l-to-100% mask-r-from-80% mask-r-to-100%">
-  <aside class="flex gap-2 slider">
+  <aside class="flex gap-2 slider w-[calc(33px*10)] md:w-[calc(34px*14)]">
     {[0,1].map(i => {
       return icons.map(element => {
         const { icon: Icon, name } = element;
